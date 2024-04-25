@@ -3,23 +3,12 @@ from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
 from . import domains, models, schemas
-from .database import SessionLocal, engine
+from .database import get_db, engine
 
 # DBの作成
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
-
-
-def get_db():
-    """
-    get_db はセッションを確立
-    """
-    db = SessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
 
 @app.get("/")

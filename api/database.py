@@ -11,3 +11,14 @@ engine = create_engine(
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
+
+
+def get_db():
+    """
+    get_db はセッションを確立
+    """
+    db = SessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()

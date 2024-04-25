@@ -144,3 +144,6 @@ config.ini
 
 # Docker related files that should not be included
 docker-compose.override.yml
+
+# others
+.DS_Store

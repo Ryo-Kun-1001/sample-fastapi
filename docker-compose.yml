@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  fastapi:
+    build:
+      context: . # ビルドコンテキストはプロジェクトルートディレクトリ
+      dockerfile: ./docker/api/Dockerfile # Dockerfileへの相対パスを指定
+    ports:
+      - "8000:80"
+    volumes:
+      - .:/app
+    environment:
+      - PYTHONUNBUFFERED=1
