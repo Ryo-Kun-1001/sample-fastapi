@@ -1,7 +1,7 @@
 APIサーバー起動
 
 ```
-uvicorn main:app --reload
+docker compose up
 ```
 
 stremlitの起動
