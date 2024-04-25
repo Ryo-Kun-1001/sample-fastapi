@@ -1,6 +1,16 @@
 # Pythonの公式イメージをベースに使用
 FROM python:3.11-slim
 
+# 必要なパッケージのインストール
+RUN apt-get update && apt-get install -y \
+    default-libmysqlclient-dev \
+    build-essential \
+    libssl-dev \
+    libffi-dev \
+    python3-dev \
+    pkg-config \
+    && rm -rf /var/lib/apt/lists/*
+
 # 作業ディレクトリの設定
 WORKDIR /app
 

@@ -9,13 +9,13 @@ from .database import Base
 class User(Base):
     __tablename__ = 'users'
     user_id = Column(Integer, primary_key=True, index=True)
-    user_name = Column(String, unique=True, index=True)
+    user_name = Column(String(12), unique=True, index=True)
 
 
 class Room(Base):
     __tablename__ = 'rooms'
     room_id = Column(Integer, primary_key=True, index=True)
-    room_name = Column(String, unique=True, index=True)
+    room_name = Column(String(12), unique=True, index=True)
     capacity = Column(Integer)
 
 
@@ -23,9 +23,9 @@ class Booking(Base):
     __tablename__ = 'bookings'
     booking_id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey(
-        'users.user_id', ondelete='SET NULL'), nullable=False)
+        'users.user_id', ondelete='SET NULL'), nullable=True)
     room_id = Column(Integer, ForeignKey(
-        'rooms.room_id', ondelete='SET NULL'), nullable=False)
+        'rooms.room_id', ondelete='SET NULL'), nullable=True)
     booked_num = Column(Integer)
     start_datetime = Column(DateTime, nullable=False)
     end_datetime = Column(DateTime, nullable=False)
