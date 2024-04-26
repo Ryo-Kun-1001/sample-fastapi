@@ -3,3 +3,6 @@ fastapi
 sqlalchemy
 aiomysql
 mysqlclient
+mysql-connector-python
+pytest
+pydantic-settings
