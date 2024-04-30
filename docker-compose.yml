@@ -19,7 +19,7 @@ services:
     platform: linux/arm64/v8 # Appleシリコン用にARMアーキテクチャを指定
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./db/conf.d/my.cnf:/etc/mysql/my.cnf
+      - ./docker/db/conf.d/my.cnf:/etc/mysql/my.cnf
       - db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
@@ -36,7 +36,7 @@ services:
     platform: linux/arm64/v8 # Appleシリコン用にARMアーキテクチャを指定
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - ./db/conf.d/my.cnf:/etc/mysql/my.cnf
+      - ./docker/test_db/conf.d/my.cnf:/etc/mysql/my.cnf
       - test-db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password

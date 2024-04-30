@@ -1,21 +1,33 @@
 import pytest  # type: ignore
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
-from api.database import Base  # モデルのBaseを適切にインポートしてください
+from api.database import Base, get_db_url
 from api import cruds
 
+# テスト用のデータベースURL
+DATABASE_URL = get_db_url()
 
-@pytest.fixture(scope="module")
+# テスト用のデータベースエンジン
+engine = create_engine(DATABASE_URL)
+TestingSessionLocal = sessionmaker(
+    autocommit=False, autoflush=False, bind=engine)
+
+# テーブルを作成
+Base.metadata.create_all(bind=engine)
+
+
+@pytest.fixture(scope="function")
 def db_session():
-    # テスト用データベースの接続設定
-    engine = create_engine('sqlite:///:memory:')  # または他のテスト用DB接続文字列
-    Base.metadata.create_all(engine)
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    db = SessionLocal()
-    yield db
-    db.close()
+    """テスト用のデータベースセッションを生成するフィクスチャ"""
+    db = TestingSessionLocal()
+    try:
+        yield db
+    finally:
+        db.close()
 
 
 def test_get_users(db_session):
-    users = cruds.get_users(db_session)
+    """ユーザーを取得するテスト関数"""
+    users = cruds.get_users(db=db_session)
+    print(users)
     assert isinstance(users, list)

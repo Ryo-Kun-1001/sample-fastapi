@@ -4,20 +4,10 @@
 docker compose build
 ```
 
-### コンテナ起動
-
-DBとテスト用DBの起動
+### 起動
 
 ```
-docker compose up -d db test_db
-```
-
-### サーバー系の起動
-
-APIサーバー起動
-
-```
-docker compose up fastapi
+docker compose up -d
 ```
 
 テスト実行
