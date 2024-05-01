@@ -31,7 +31,7 @@ docker compse down
 ボリュームを削除した上でダウンさせて再起動
 
 ```
-docker compse down
+docker compse down -v
 ```
 
 ```
@@ -41,11 +41,11 @@ docker compose up -d
 ### テスト実行
 
 ```
-docker-compose run -e TESTING=True --rm fastapi pytest
+docker compose run -e TESTING=True --rm fastapi pytest
 ```
 
 print出力したい場合はsオプションをつける
 
 ```
-docker-compose run -e TESTING=True --rm fastapi pytest -s
+docker compose run -e TESTING=True --rm fastapi pytest -s
 ```
