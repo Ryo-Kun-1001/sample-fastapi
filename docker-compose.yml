@@ -20,6 +20,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./docker/db/conf.d/my.cnf:/etc/mysql/my.cnf
+      - ./docker/db/initdb:/docker-entrypoint-initdb.d
       - db-data:/var/lib/mysql
     environment:
       - MYSQL_ROOT_PASSWORD=password
