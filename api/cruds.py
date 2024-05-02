@@ -6,7 +6,7 @@ def get_users(db: Session, skip: int = 0, limit: int = 100):
     """
     get_users はユーザー一覧取得
     """
-    return db.query(models.User).offset(skip).limit(limit).all()
+    return db.query(models.User).order_by(models.User.user_id).offset(skip).limit(limit).all()
 
 
 def get_rooms(db: Session, skip: int = 0, limit: int = 100):
