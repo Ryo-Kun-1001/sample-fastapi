@@ -6,3 +6,4 @@ mysqlclient
 mysql-connector-python
 pytest
 pydantic-settings
+pydantic>=2.0

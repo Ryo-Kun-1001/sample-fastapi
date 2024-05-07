@@ -1,14 +1,14 @@
 services:
   fastapi:
     build:
-      context: . # ビルドコンテキストはプロジェクトルートディレクトリ
-      dockerfile: ./docker/api/Dockerfile # Dockerfileへの相対パスを指定
+      context: .
+      dockerfile: ./docker/api/Dockerfile
     ports:
       - "8000:80"
     volumes:
       - .:/app
     environment:
-      - PYTHONUNBUFFERED=1
+      PYTHONUNBUFFERED: 1
     depends_on:
       - db
     networks:
@@ -16,17 +16,17 @@ services:
 
   db:
     image: mysql:8.0
-    platform: linux/arm64/v8 # Appleシリコン用にARMアーキテクチャを指定
+    platform: linux/arm64/v8
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./docker/db/conf.d/my.cnf:/etc/mysql/my.cnf
       - ./docker/db/initdb:/docker-entrypoint-initdb.d
       - db-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=mydatabase
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3306:3306"
     networks:
@@ -34,16 +34,16 @@ services:
 
   test_db:
     image: mysql:8.0
-    platform: linux/arm64/v8 # Appleシリコン用にARMアーキテクチャを指定
+    platform: linux/arm64/v8
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./docker/test_db/conf.d/my.cnf:/etc/mysql/my.cnf
       - test-db-data:/var/lib/mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=password
-      - MYSQL_DATABASE=test_db
-      - MYSQL_USER=user
-      - MYSQL_PASSWORD=password
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${TEST_DATABASE}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
       - "3307:3307"
     networks:
