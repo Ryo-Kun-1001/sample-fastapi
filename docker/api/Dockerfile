@@ -9,7 +9,11 @@ RUN apt-get update && apt-get install -y \
     libffi-dev \
     python3-dev \
     pkg-config \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
+# libgd3は個別にインストールしないと、依存関係かイメージビルドが失敗することがある
+RUN apt-get update && apt-get install -y libgd3
 
 # 作業ディレクトリの設定
 WORKDIR /app
