@@ -1,7 +1,7 @@
-# Pythonの公式イメージをベースに使用
+# ベースイメージを指定
 FROM python:3.11-slim
 
-# 必要なパッケージのインストール
+# 必要なパッケージをインストール
 RUN apt-get update && apt-get install -y \
     default-libmysqlclient-dev \
     build-essential \
@@ -14,14 +14,14 @@ RUN apt-get update && apt-get install -y \
 # 作業ディレクトリの設定
 WORKDIR /app
 
-# 依存関係のファイルをコピー
+# 依存ファイルをコピー
 COPY ./docker/api/requirements.txt .
 
-# 依存関係のインストール
+# 依存パッケージのインストール
 RUN pip install --no-cache-dir -r requirements.txt
 
-# アプリケーションのソースをコピー
-COPY ./api /app
+# アプリケーションコードをコピー
+COPY ./api /app/api
 
-# コンテナの起動時に実行するコマンド
+# コンテナ起動時に実行するコマンド
 CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "80"]

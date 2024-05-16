@@ -2,7 +2,7 @@ from typing import List
 from fastapi import FastAPI, Depends
 from sqlalchemy.orm import Session
 
-from . import domains, models, schemas
+from api import domains, models, schemas
 from .database import get_db, engine
 
 # DBの作成
