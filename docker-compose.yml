@@ -22,7 +22,7 @@ services:
     command: --default-authentication-plugin=mysql_native_password
     volumes:
       - ./docker/db/conf.d:/etc/mysql/conf.d
-      - ./docker/db/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/db/initdb:/docker-entrypoint-initdb.d
       - db-data:/var/lib/mysql
     env_file:
       - .env
@@ -35,8 +35,8 @@ services:
     image: mysql:8.0
     platform: linux/amd64
     volumes:
-      - ./docker/test_db/conf.d:/etc/mysql/conf.d
-      - ./docker/test_db/initdb.d:/docker-entrypoint-initdb.d
+      - ./docker/db/conf.d:/etc/mysql/conf.d
+      - ./docker/db/initdb:/docker-entrypoint-initdb.d
       - test-db-data:/var/lib/mysql
     env_file:
       - .env
