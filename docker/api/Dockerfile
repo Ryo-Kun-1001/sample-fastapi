@@ -28,4 +28,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY ./api /app/api
 
 # コンテナ起動時に実行するコマンド
-CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "8000"]
