@@ -15,7 +15,7 @@ def get_db_url():
     return settings.TEST_DATABASE_URL if settings.TESTING else settings.DATABASE_URL
 
 
-def create_db_engine(url, max_attempts=5, delay=2):
+def create_db_engine(url, max_attempts=10, delay=2):
     """データベースエンジンを生成し、必要に応じてリトライを行う。"""
     attempt_count = 0
     while attempt_count < max_attempts:
